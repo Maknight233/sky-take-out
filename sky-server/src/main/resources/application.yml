@@ -37,3 +37,10 @@ sky:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+
+pagehelper:
+  helper-dialect: mysql        # Dialect for your database (mysql, oracle, etc.)
+  reasonable: true            # If pageNum < 1, set pageNum = 1; if pageNum > pages, set pageNum = pages
+  support-methods-arguments: true
+  page-size-zero: true        # If pageSize=0, paging is disabled and returns all results
+  params: count=countSql
