@@ -72,6 +72,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setStatus(StatusConstant.ENABLE);
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());
+        //TODO change 10L to userId
         employee.setCreateUser(10L);
         employee.setUpdateUser(10L);
         employeeMapper.insert(employee);
