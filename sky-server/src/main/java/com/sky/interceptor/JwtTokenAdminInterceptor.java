@@ -28,9 +28,9 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
      *
      * @param request request from web
      * @param response response to web
-     * @param handler
-     * @return
-     * @throws Exception
+     * @param handler check if it is Controller method or other
+     * @return true for continue, false for jwt failed
+     * @throws Exception jwt fail response will set to 401
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //判断当前拦截到的是Controller的方法还是其他资源
