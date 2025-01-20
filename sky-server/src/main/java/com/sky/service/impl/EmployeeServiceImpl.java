@@ -27,8 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     /**
      * 员工登录
      *
-     * @param employeeLoginDTO
-     * @return
+     * @param employeeLoginDTO info of employee who log in
+     * @return info of employee who log in
      */
     public Employee login(EmployeeLoginDTO employeeLoginDTO) {
         String username = employeeLoginDTO.getUsername();
@@ -62,7 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * add employee
-     * @param employeeDTO
+     * @param employeeDTO info of employee we want to add
      */
     @Override
     public void add(EmployeeDTO employeeDTO) {

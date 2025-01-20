@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +36,8 @@ public class EmployeeController {
     /**
      * 登录
      *
-     * @param employeeLoginDTO
-     * @return
+     * @param employeeLoginDTO info of employee who log in
+     * @return info of employee who log in and jwt
      */
     @PostMapping("/login")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
@@ -81,7 +80,7 @@ public class EmployeeController {
      */
     @PostMapping
     @ApiOperation("add employee")
-    public Result addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    public Result<String> addEmployee(@RequestBody EmployeeDTO employeeDTO) {
         log.info("new employee: {}", employeeDTO);
         employeeService.add(employeeDTO);
         return Result.success();

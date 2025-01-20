@@ -17,8 +17,8 @@ public class GlobalExceptionHandler {
 
     /**
      * 捕获业务异常
-     * @param ex
-     * @return
+     * @param ex handle any exception we did not exception
+     * @return error massage
      */
     @ExceptionHandler
     public Result exceptionHandler(BaseException ex){
