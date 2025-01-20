@@ -21,13 +21,13 @@ public class GlobalExceptionHandler {
      * @return error massage
      */
     @ExceptionHandler
-    public Result exceptionHandler(BaseException ex){
+    public Result<String> exceptionHandler(BaseException ex){
         log.error("异常信息：{}", ex.getMessage());
         return Result.error(ex.getMessage());
     }
 
     @ExceptionHandler
-    public Result exceptionHandler(SQLIntegrityConstraintViolationException ex){
+    public Result<String> exceptionHandler(SQLIntegrityConstraintViolationException ex){
         String msg = "";
         if (ex.getMessage().contains("Duplicate entry")) {
             msg = "Exception: Username already exist, please try a different username";
