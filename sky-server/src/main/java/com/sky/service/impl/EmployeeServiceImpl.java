@@ -16,6 +16,7 @@ import com.sky.exception.PasswordErrorException;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.result.PageResult;
 import com.sky.service.EmployeeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -91,6 +93,47 @@ public class EmployeeServiceImpl implements EmployeeService {
         pageResult.setTotal(page.getTotal());
         pageResult.setRecords(page.getResult());
         return pageResult;
+    }
+
+    @Override
+    public void enableOrDisableEmp(Integer status, Long id) {
+        if (id == BaseContext.getCurrentId()) {
+            throw new AccountLockedException(MessageConstant.BLOCK_YOURSELF);
+        }
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .updateTime(LocalDateTime.now())
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+        log.info("employee ID and status are {}, {}", employee.getId(), employee.getStatus());
+        employeeMapper.update(employee);
+    }
+
+    @Override
+    public void updateEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = Employee.builder()
+                .id(employeeDTO.getId())
+                .name(employeeDTO.getName())
+                .phone(employeeDTO.getPhone())
+                .sex(employeeDTO.getSex())
+                .username(employeeDTO.getUsername())
+                .updateUser(BaseContext.getCurrentId())
+                .updateTime(LocalDateTime.now())
+                .build();
+        log.info("empID is: {}", employeeDTO.getId());
+        employeeMapper.update(employee);
+    }
+
+    @Override
+    public Employee getEmployeeById(Long id) {
+        Employee employee = employeeMapper.getById(id);
+        if (employee == null) {
+            //账号不存在
+            throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
+        }
+        employee.setPassword("****");
+        return employee;
     }
 
 }

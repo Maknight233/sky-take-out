@@ -86,6 +86,11 @@ public class EmployeeController {
         return Result.success();
     }
 
+    /**
+     * get employee for a page by name
+     * @param employeePageQueryDTO info about name and page
+     * @return a page list
+     */
     @GetMapping("/page")
     @ApiOperation("get employees by page number")
     public Result<PageResult> getEmployeesByPage(EmployeePageQueryDTO employeePageQueryDTO) {
@@ -93,4 +98,30 @@ public class EmployeeController {
         return Result.success(pageResult);
     }
 
+    /**
+     * change the status of the employee
+     * @param status value of status need to change
+     * @param id employee's id
+     * @return success
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("changeStatus")
+    public Result<String> enableOrDisableEmployee(@PathVariable Integer status, Long id) {
+        employeeService.enableOrDisableEmp(status, id);
+        return Result.success();
+    }
+
+    @PutMapping
+    @ApiOperation("update employee")
+    public Result<String> updateEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        employeeService.updateEmployee(employeeDTO);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("get employee by Id")
+    public Result<Employee> getEmployeeById(@PathVariable Long id) {
+        Employee employee = employeeService.getEmployeeById(id);
+        return Result.success(employee);
+    }
 }

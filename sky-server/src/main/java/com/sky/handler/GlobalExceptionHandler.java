@@ -1,6 +1,7 @@
 package com.sky.handler;
 
 import com.sky.exception.BaseException;
+import com.sky.exception.BlockYourselfException;
 import com.sky.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,6 +35,10 @@ public class GlobalExceptionHandler {
             log.info(msg);
         }
         return Result.error(msg);
+    }
+    public Result<String> exceptionHandler(BlockYourselfException ex){
+        log.error(ex.getMessage());
+        return Result.error(ex.getMessage());
     }
 
 }
