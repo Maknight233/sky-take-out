@@ -14,4 +14,6 @@ public interface SetmealMapper {
     @Select("select count(id) from setmeal where category_id = #{categoryId}")
     Integer countByCategoryId(Long id);
 
+    @Select("select count(Id) from sky_take_out.setmeal_dish sd where sd.dish_id = #{dishId};")
+    Integer countByDishId(Long dishId);
 }
