@@ -51,6 +51,7 @@ public class DishServiceImpl implements DishService {
         PageResult pageResult = new PageResult();
         try (Page<Object> objects = PageHelper.startPage(dishPageQueryDTO.getPage(), dishPageQueryDTO.getPageSize());
              Page<Dish> page = dishMapper.pageDish(dishPageQueryDTO)) {
+            log.info("start page: {}; page size: {}", objects.getPages(), objects.getPageSize());
             pageResult.setTotal(page.getTotal());
             pageResult.setRecords(page.getResult());
         }
