@@ -27,13 +27,13 @@ import java.util.List;
 public class DishServiceImpl implements DishService {
 
     @Autowired
-    public DishFlavorMapper dishFlavorMapper;
+    private DishFlavorMapper dishFlavorMapper;
 
     @Autowired
-    public DishMapper dishMapper;
+    private DishMapper dishMapper;
 
     @Autowired
-    public SetmealMapper setmealMapper;
+    private SetmealMapper setmealMapper;
 
     @Transactional
     @Override
