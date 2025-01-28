@@ -43,7 +43,7 @@
             <if test="name != null and name != ''">
                 name like concat('%', #{name}, '%')
             </if>
-            <if test="categoryId != null and categoryId != ''">
+            <if test="categoryId != null">
                 and category_id = #{categoryId}
             </if>
             <if test="status != null">
