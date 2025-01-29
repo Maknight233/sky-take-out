@@ -1,8 +1,11 @@
 package com.sky.mapper;
 
+import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
+import com.sky.entity.Dish;
 import com.sky.entity.Setmeal;
 import com.sky.enumeration.OperationType;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -23,4 +26,12 @@ public interface SetmealMapper {
 
     @AutoFill(value = OperationType.INSERT)
     void add(Setmeal setmeal);
+
+    Page<Setmeal> pageSetmeal(Setmeal setmeal);
+
+    @Select("select * from setmeal where id = #{id}")
+    Setmeal getSetmealById(Long id);
+
+    @Delete("delete from setmeal where id = #{id}")
+    void deleteById(Long id);
 }

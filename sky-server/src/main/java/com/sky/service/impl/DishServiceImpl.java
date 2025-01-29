@@ -50,9 +50,10 @@ public class DishServiceImpl implements DishService {
     @Override
     public PageResult pageDish(DishPageQueryDTO dishPageQueryDTO) {
         PageResult pageResult = new PageResult();
+        Integer id = dishPageQueryDTO.getCategoryId();
         Dish dish = Dish.builder()
                 .name(dishPageQueryDTO.getName())
-                .categoryId(Long.valueOf(dishPageQueryDTO.getCategoryId()))
+                .categoryId(((id == null)? null : Long.valueOf(id)))
                 .status(dishPageQueryDTO.getStatus())
                 .build();
         log.info("categoryId:{}", dish.getCategoryId());
