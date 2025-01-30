@@ -124,6 +124,7 @@ public class SetmealServiceImpl implements SetmealService {
         setmealMapper.update(setmeal);
         setmealDishMapper.deleteById(setmealDTO.getId());
         log.info("The setmealId is: {}", setmealDTO.getId());
+        log.info("The setmealDTO is: {}", setmealDTO);
         setmealDTO.getSetmealDishes().forEach(setmealDish -> setmealDish.setSetmealId(setmealDTO.getId()));
         setmealDishMapper.addAll(setmealDTO.getSetmealDishes());
     }
