@@ -123,6 +123,7 @@ public class SetmealServiceImpl implements SetmealService {
         BeanUtils.copyProperties(setmealDTO, setmeal);
         setmealMapper.update(setmeal);
         setmealDishMapper.deleteById(setmealDTO.getId());
+        log.info("The setmealId is: {}", setmealDTO.getId());
         setmealDTO.getSetmealDishes().forEach(setmealDish -> setmealDish.setSetmealId(setmealDTO.getId()));
         setmealDishMapper.addAll(setmealDTO.getSetmealDishes());
     }
