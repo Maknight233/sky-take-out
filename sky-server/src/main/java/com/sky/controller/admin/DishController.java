@@ -2,6 +2,7 @@ package com.sky.controller.admin;
 
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
+import com.sky.entity.Dish;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.DishService;
@@ -11,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/dish")
@@ -56,5 +59,11 @@ public class DishController {
     public Result<String> startStopDish(@PathVariable Integer status, Long id) {
         dishService.startStopDish(status, id);
         return Result.success();
+    }
+
+    @GetMapping("/list")
+    public Result<List<Dish>> getDishByCategoryId(Long categoryId) {
+        List<Dish> list = dishService.getDishByCategoryId(categoryId);
+        return Result.success(list);
     }
 }

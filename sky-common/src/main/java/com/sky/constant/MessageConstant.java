@@ -24,5 +24,6 @@ public class MessageConstant {
     public static final String ORDER_STATUS_ERROR = "Order status error";
     public static final String ORDER_NOT_FOUND = "Order not found";
     public static final String BLOCK_YOURSELF = "Cannot block yourself";
+    public static final String DISH_NOT_EXIST = "Dish does not exist";
 
 }

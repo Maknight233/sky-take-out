@@ -37,14 +37,26 @@ public class SetmealController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "get seatmeal by id")
-    public Result<SetmealVO> getSetmealById(@PathVariable Long id) {
-        SetmealVO setmealVO = setmealService.getSetmealById(id);
+    public Result<SetmealVO> getSetmealById(@PathVariable String id) {
+        SetmealVO setmealVO = setmealService.getSetmealById(Long.valueOf(id));
         return Result.success(setmealVO);
     }
 
     @DeleteMapping
     public Result<String> deleteSetmeal(Long[] ids) {
         setmealService.deleteAll(ids);
+        return Result.success();
+    }
+
+    @PostMapping("status/{status}")
+    public Result<String> startOrStopSetmeal(@PathVariable Integer status, Long id) {
+        setmealService.startOrStopSetmeal(status, id);
+        return Result.success();
+    }
+
+    @PutMapping
+    public Result<String> updateSetmeal(@RequestBody SetmealDTO setmealDTO) {
+        setmealService.update(setmealDTO);
         return Result.success();
     }
 }
