@@ -39,6 +39,8 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
             return true;
         }
 
+
+
         //1、从请求头中获取令牌
         String token = request.getHeader(jwtProperties.getAdminTokenName());
 
@@ -46,10 +48,14 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
         try {
             log.info("jwt校验:{}", token);
             Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
-            Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
-            log.info("当前员工id：{}", empId);
+            Object id = claims.get(JwtClaimsConstant.EMP_ID);
+            if (id == null) {
+                id = claims.get(JwtClaimsConstant.USER_ID);
+            }
+            Long uid = Long.valueOf(id.toString());
+            log.info("当前员工id：{}", uid);
             //use threadLocal to set userId
-            BaseContext.setCurrentId(empId);
+            BaseContext.setCurrentId(uid);
             //3、通过，放行
             return true;
         } catch (Exception ex) {

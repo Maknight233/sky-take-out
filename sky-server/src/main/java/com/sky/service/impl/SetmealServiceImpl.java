@@ -3,6 +3,7 @@ package com.sky.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.sky.constant.MessageConstant;
+import com.sky.constant.StatusConstant;
 import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.entity.Dish;
@@ -16,6 +17,7 @@ import com.sky.mapper.SetmealDishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.SetmealService;
+import com.sky.vo.DishItemVO;
 import com.sky.vo.SetmealVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -23,7 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -126,5 +130,34 @@ public class SetmealServiceImpl implements SetmealService {
         log.info("The setmealId is: {}", setmealDTO.getId());
         setmealDTO.getSetmealDishes().forEach(setmealDish -> setmealDish.setSetmealId(setmealDTO.getId()));
         setmealDishMapper.addAll(setmealDTO.getSetmealDishes());
+    }
+
+    @Override
+    public List<Setmeal> getSetmealByCategoryId(Long categoryId) {
+        Setmeal setmeal = Setmeal.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+
+        return setmealMapper.getSetmealByCategoryIdAndStatus(setmeal);
+    }
+
+    @Override
+    public List<DishItemVO> getSetmealDishByCategoryId(Long id) {
+        List<SetmealDish> dishes = setmealDishMapper.getSetmealDishById(id);
+        List<DishItemVO> list = new ArrayList<>();
+        for (SetmealDish dish : dishes) {
+            Dish d = dishMapper.getById(dish.getDishId());
+            if (Objects.equals(d.getStatus(), StatusConstant.ENABLE)) {
+                DishItemVO dishItemVO = DishItemVO.builder()
+                        .image(d.getImage())
+                        .name(d.getName())
+                        .copies(dish.getCopies())
+                        .description(d.getDescription())
+                        .build();
+                list.add(dishItemVO);
+            }
+        }
+        return list;
     }
 }

@@ -13,3 +13,14 @@
 
 - back end
   - [x] add user login method
+  
+    Api
+  
+    - [x] category
+    - [ ] address book
+    - [x] setmeal view
+    - [x] shop
+    - [x] user
+    - [x] dish view
+    - [ ] order
+    - [ ] shop cart

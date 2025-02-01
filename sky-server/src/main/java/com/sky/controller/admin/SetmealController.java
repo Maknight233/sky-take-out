@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/admin/setmeal")
-@RestController
+@RestController("adminSetmealController")
 @Slf4j
 @Api(tags = "Setmeal Api")
 public class SetmealController {

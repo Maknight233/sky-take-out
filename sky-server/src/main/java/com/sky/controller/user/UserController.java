@@ -51,4 +51,9 @@ public class UserController {
 
         return Result.success(userLoginVO);
     }
+
+    @PostMapping("/logout")
+    public Result<String> logout() {
+        return Result.success();
+    }
 }
