@@ -7,6 +7,7 @@ import com.sky.vo.DishItemVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ public class SetmealController {
 
     @GetMapping("/list")
     @ApiOperation("get setmeal by category Id")
+    @Cacheable(cacheNames = "setmealCache::category", key = "#categoryId")
     public Result<List<Setmeal>> getSetmealByCategoryID(Long categoryId) {
 
         List<Setmeal> list = setmealService.getSetmealByCategoryId(categoryId);
@@ -33,6 +35,7 @@ public class SetmealController {
 
     @GetMapping("/dish/{id}")
     @ApiOperation("get enable setmeal dish by id")
+    @Cacheable(cacheNames = "setmealCache::dish", key = "#id")
     public Result<List<DishItemVO>> getSetmealDishById(@PathVariable Long id) {
         List<DishItemVO> dishes = setmealService.getSetmealDishByCategoryId(id);
         return Result.success(dishes);

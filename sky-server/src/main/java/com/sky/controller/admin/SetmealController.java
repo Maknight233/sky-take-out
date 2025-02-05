@@ -10,6 +10,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/admin/setmeal")
@@ -23,6 +25,7 @@ public class SetmealController {
 
     @PostMapping
     @ApiOperation("add setmeal")
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result<String> addSetmeal(@RequestBody SetmealDTO setmealDTO) {
         setmealService.add(setmealDTO);
         return Result.success();
@@ -43,18 +46,21 @@ public class SetmealController {
     }
 
     @DeleteMapping
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result<String> deleteSetmeal(Long[] ids) {
         setmealService.deleteAll(ids);
         return Result.success();
     }
 
     @PostMapping("status/{status}")
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result<String> startOrStopSetmeal(@PathVariable Integer status, Long id) {
         setmealService.startOrStopSetmeal(status, id);
         return Result.success();
     }
 
     @PutMapping
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result<String> updateSetmeal(@RequestBody SetmealDTO setmealDTO) {
         setmealService.update(setmealDTO);
         return Result.success();

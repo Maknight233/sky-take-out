@@ -24,3 +24,15 @@
     - [x] dish view
     - [ ] order
     - [ ] shop cart
+
+## cache by redis
+
+use:
+
+need to add EnableCaching in the start program
+
+cacheable to get cache, if no cache, it will save cache after method done
+
+cacheEvict to delete cache,
+
+cacheput to add a specific cache
