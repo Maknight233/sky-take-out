@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sky.mapper.AddressBookMapper">
+
+    <insert id="add" parameterType="com.sky.entity.AddressBook">
+        insert into sky_take_out.address_book (address_book.user_id, address_book.consignee, address_book.sex, address_book.phone, address_book.province_code, address_book.province_name, address_book.city_code, address_book.city_name, address_book.district_code, address_book.district_name, address_book.detail, address_book.label)
+        values (#{userId}, #{consignee}, #{sex}, #{phone}, #{provinceCode}, #{provinceName}, #{cityCode}, #{cityName}, #{districtCode}, #{districtName}, #{detail}, #{label});
+    </insert>
+</mapper>
