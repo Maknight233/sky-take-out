@@ -23,7 +23,7 @@
     - [x] user
     - [x] dish view
     - [ ] order
-    - [ ] shop cart
+    - [x] shop cart
 
 ## cache by redis
 
