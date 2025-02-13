@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -56,5 +57,27 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         } else {
             shoppingCartMapper.addOne(shoppingCart);
         }
+    }
+
+    @Override
+    public List<ShoppingCart> getAll() {
+        List<ShoppingCart> shoppingCarts = shoppingCartMapper.getAllById(BaseContext.getCurrentId());
+        return shoppingCarts;
+    }
+
+    @Override
+    public void delete(ShoppingCartDTO shoppingCartDTO) {
+        ShoppingCart shoppingCart = ShoppingCart.builder()
+                .dishId(shoppingCartDTO.getDishId())
+                .dishFlavor(shoppingCartDTO.getDishFlavor())
+                .setmealId(shoppingCartDTO.getSetmealId())
+                .userId(BaseContext.getCurrentId())
+                .build();
+        shoppingCartMapper.delete(shoppingCart);
+    }
+
+    @Override
+    public void deleteAll() {
+        shoppingCartMapper.deleteAllById(BaseContext.getCurrentId());
     }
 }
