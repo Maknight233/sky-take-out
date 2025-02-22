@@ -17,7 +17,7 @@
     Api
   
     - [x] category
-    - [ ] address book
+    - [x] address book
     - [x] setmeal view
     - [x] shop
     - [x] user
