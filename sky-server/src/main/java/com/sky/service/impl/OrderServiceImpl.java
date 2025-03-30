@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
 
         orderMapper.insert(orders);
 
-        List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+        List<OrderDetail> orderDetails = new ArrayList<>();
         for (ShoppingCart shoppingCart : shoppingCartList) {
             OrderDetail orderDetail = new OrderDetail();
             BeanUtils.copyProperties(shoppingCart, orderDetail);
